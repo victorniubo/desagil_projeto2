@@ -4,13 +4,13 @@ public class Product {
     private String categotia;
     private String modelo;
     private String tipo;
-    private Double COD;
+    private String COD;
     private String descritivo;
-    private Double preco1;
-    private Double preco2;
-    private Double preco3;
+    private String preco1;
+    private String preco2;
+    private String preco3;
 
-    public Product(String categoria, String modelo, String tipo, Double COD, String descritivo, Double preco1, Double preco2, Double preco3) {
+    public Product(String s, String categoria, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3) {
         this.categotia = categoria;
         this.modelo = modelo;
         this.tipo = tipo;
@@ -23,9 +23,9 @@ public class Product {
     public String getCategoria(){return categotia;}
     public String getModelo(){return modelo;}
     public String getTipo(){return tipo; }
-    public Double getCOD() { return COD;}
+    public String getCOD() { return COD;}
     public String getDescritivo(){ return descritivo;}
-    public Double getPreco1(){return preco1;}
-    public Double getPreco2(){return preco2;}
-    public Double getPreco3(){return preco3;}
+    public String getPreco1(){return preco1;}
+    public String getPreco2(){return preco2;}
+    public String getPreco3(){return preco3;}
 }
