@@ -30,15 +30,6 @@ public class MainActivity extends AppCompatActivity {
         EditText procura = findViewById(R.id.barraProcura);
         prodlist = ReadProducts();
 
-//        Product prod1 = new Product("Discoso e anéis","L-RAMPA","Prod",12.00,"DISCO MILHO - L RAMPA",12.00,12.00,12.00);
-//        Product prod2 = new Product("Discoso e anéis","L-RAMPA","Prod",12.00,"DISCO MILHO - L RAMPA",12.00,12.00,12.00);
-//        Product prod3 = new Product("Discoso e anéis","L-RAMPA","Prod",12.00,"DISCO MILHO - L RAMPA",12.00,12.00,12.00);
-//        Product prod4 = new Product("Discoso e anéis","L-RAMPA","Prod",12.00,"DISCO MILHO - L RAMPA",12.00,12.00,12.00);
-//        prodlist.add(prod1);
-//        prodlist.add(prod2);
-//        prodlist.add(prod3);
-//        prodlist.add(prod4);
-
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
 
