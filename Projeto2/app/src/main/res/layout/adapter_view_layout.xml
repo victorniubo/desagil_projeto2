@@ -11,29 +11,32 @@
 
 
     <TextView
-        android:id="@+id/categoria"
+        android:id="@+id/tvcategoria"
         android:layout_width="137dp"
         android:layout_height="84dp"
         android:layout_weight="1"
         android:text="TextView1"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="15dp"/>
 
     <TextView
-        android:id="@+id/modelo"
+        android:id="@+id/tvmodelo"
         android:layout_width="137dp"
         android:layout_height="84dp"
         android:layout_weight="1"
         android:text="TextView2"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="20dp"/>
 
     <TextView
-        android:id="@+id/descritivo"
+        android:id="@+id/tvdescritivo"
         android:layout_width="137dp"
         android:layout_height="84dp"
         android:layout_weight="1"
         android:text="TextView3"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="15dp"/>
 </LinearLayout>

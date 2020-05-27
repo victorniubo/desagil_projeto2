@@ -20,7 +20,7 @@ public class Product {
         this.preco2 = preco2;
         this.preco3 = preco3;
     }
-    public String getCategotia(){return categotia;}
+    public String getCategoria(){return categotia;}
     public String getModelo(){return modelo;}
     public String getTipo(){return tipo; }
     public Double getCOD() { return COD;}
