@@ -8,11 +8,11 @@
     tools:context=".MainActivity"
     android:weightSum="1">
 
-    <EditText
-        android:id="@+id/barraProcura"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pesquise o Produto Desejado:" />
+<!--    <EditText-->
+<!--        android:id="@+id/barraProcura"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Pesquise o Produto Desejado:" />-->
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
