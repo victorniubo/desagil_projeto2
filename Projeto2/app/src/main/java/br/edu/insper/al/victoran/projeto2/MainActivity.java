@@ -1,6 +1,7 @@
 package br.edu.insper.al.victoran.projeto2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.AndroidViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +10,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,23 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
     ProdListAdaptor adaptor;
     ArrayList<Product> prodlist = new ArrayList<>();
+    ListView listaprods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView listaprods = findViewById(R.id.listView);
-        EditText procura = findViewById(R.id.barraProcura);
+        listaprods = findViewById(R.id.listView);
+//        EditText procura = findViewById(R.id.barraProcura);
         prodlist = ReadProducts();
 
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
-
-        procura.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         InputStream is = getResources().openRawResource(R.raw.produtos);
         BufferedReader StrR = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String Str;
-        ArrayList<Product> prodlist = new ArrayList<>();
+
         try {
 
             //Essa estrutura do looping while é clássica para ler cada linha
@@ -90,7 +91,50 @@ public class MainActivity extends AppCompatActivity {
         return prodlist;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.my_menu,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.searchMenu);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ArrayList<Product> resultados = new ArrayList<>();
+
+                for(Product x:prodlist){
+
+                    if(x.getCategoria().toLowerCase().contains(newText.toLowerCase())){
+                        resultados.add(x);
+
+                    }
+                    else if(x.getModelo().toLowerCase().contains(newText.toLowerCase())){
+                        resultados.add(x);
+
+                    }
+                    else if(x.getDescritivo().toLowerCase().contains(newText.toLowerCase())){
+                        resultados.add(x);
+
+                    }
+
+
+                }
+                ((ProdListAdaptor)listaprods.getAdapter()).update(resultados);
 
 
 
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }
