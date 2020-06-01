@@ -2,10 +2,13 @@ package br.edu.insper.al.victoran.projeto2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -49,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        listaprods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                intent = intent.putExtra("Produto", prodlist.get(position));
+                startActivity(intent);
+
+            }
+        });
 
     }
     private ArrayList<Product> ReadProducts(){
@@ -77,5 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
         return prodlist;
     }
+
+
+
 
 }

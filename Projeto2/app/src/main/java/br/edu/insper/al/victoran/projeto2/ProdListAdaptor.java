@@ -32,8 +32,7 @@ public class ProdListAdaptor extends ArrayAdapter<Product> {
         String cat = getItem(position).getCategoria();
         String mod = getItem(position).getModelo();
         String desc = getItem(position).getDescritivo();
-
-        Product1 produto = new Product1(cat, mod, desc);
+        
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
