@@ -10,10 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProdListAdaptor extends ArrayAdapter {
 
@@ -36,7 +33,6 @@ public class ProdListAdaptor extends ArrayAdapter {
         TextView textView2;
         TextView textView3;
     }
-
     @Override
     public int getCount() {
         return itens.size();

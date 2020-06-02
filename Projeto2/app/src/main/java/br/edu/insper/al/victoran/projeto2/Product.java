@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product implements Parcelable {
+    private String id;
     private String categoria;
     private String modelo;
     private String linha;
@@ -14,7 +15,8 @@ public class Product implements Parcelable {
     private String preco2;
     private String preco3;
 
-    public Product(String categoria,String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3) {
+    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3) {
+        this.id = id;
         this.categoria = categoria;
         this.linha = linha;
         this.modelo = modelo;
@@ -27,6 +29,7 @@ public class Product implements Parcelable {
     }
 
     protected Product(Parcel in) {
+        id = in.readString();
         categoria = in.readString();
         modelo = in.readString();
         linha = in.readString();
@@ -60,6 +63,10 @@ public class Product implements Parcelable {
     public String getPreco2(){return preco2;}
     public String getPreco3(){return preco3;}
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -67,6 +74,7 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(categoria);
         dest.writeString(modelo);
         dest.writeString(linha);
