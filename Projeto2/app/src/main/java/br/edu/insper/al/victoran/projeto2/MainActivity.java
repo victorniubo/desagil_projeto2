@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                intent = intent.putExtra("Produto", prodlist.get(position));
+                intent = intent.putExtra("Produto", adaptor.itens.get(position));
                 startActivity(intent);
 
             }
@@ -93,18 +93,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
 
                 ArrayList<Product> resultados = new ArrayList<>();
+                ArrayList<Integer> id = new ArrayList<>();
 
                 for(Product x:prodlist){
 
                     if(x.getCategoria().toLowerCase().contains(newText.toLowerCase())){
+                        int numero = Integer.parseInt(x.getId());
+                        id.add(numero);
                         resultados.add(x);
 
                     }
                     else if(x.getModelo().toLowerCase().contains(newText.toLowerCase())){
+                        int numero = Integer.parseInt(x.getId());
+                        id.add(numero);
                         resultados.add(x);
 
                     }
                     else if(x.getDescritivo().toLowerCase().contains(newText.toLowerCase())){
+                        int numero = Integer.parseInt(x.getId());
+                        id.add(numero);
                         resultados.add(x);
 
                     }
