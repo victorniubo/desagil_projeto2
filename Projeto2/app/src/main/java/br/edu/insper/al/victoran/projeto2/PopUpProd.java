@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class PopUpProd extends AppCompatActivity {
@@ -37,6 +38,11 @@ public class PopUpProd extends AppCompatActivity {
     TextView PrecoC;
 
     ImageView imagem;
+
+    Order order;
+    private LinkedList<Order> orders = new LinkedList<>();
+    Carrinho carrinho = new Carrinho(orders);
+
 
     ArrayList<Product> referencia = new ArrayList<>();
 
@@ -66,6 +72,7 @@ public class PopUpProd extends AppCompatActivity {
 
         Intent intent = getIntent();
         Product product = intent.getParcelableExtra("Produto");
+        order = new Order(product);
 
         PUcat.setText("Categoria: "+product.getCategoria());
         PUlinha.setText("Linha: "+product.getLinha());
@@ -120,6 +127,7 @@ public class PopUpProd extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
 
                 PrecoA.setText("A: "+newVal+"\nR$"+product.getPreco1());
+                order.setQuantidade(newVal);
             }
         });
         np2.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -127,6 +135,7 @@ public class PopUpProd extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
 
                 PrecoB.setText("B: "+newVal+"\nR$"+product.getPreco2());
+                order.setQuantidade(newVal);
 
             }
         });
@@ -135,9 +144,25 @@ public class PopUpProd extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
 
                 PrecoC.setText("C: "+newVal+"\nR$"+product.getPreco3());
+                order.setQuantidade(newVal);
 
             }
         });
+        Button addcart = findViewById(R.id.addcart);
+        addcart.setOnClickListener((view) -> {
+            carrinho.addOrder(order);
+            String s = String.valueOf(carrinho.precoFinal());
+            showToast("R$ " + s);
+        });
+
+
+
+    }
+    private void showToast(String text) {
+
+        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        toast.show();
+
 
         Button addcart = findViewById(R.id.addcart);
 

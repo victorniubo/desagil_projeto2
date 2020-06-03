@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class Carrinho {
     private LinkedList<Order> orders;
-    public Carrinho(){
-        orders = new LinkedList<>();
+    public Carrinho(LinkedList<Order> orders){
+        this.orders = new LinkedList<>();
     }
     public void addOrder(Order order){
         orders.add(order);
@@ -13,7 +13,7 @@ public class Carrinho {
     public Double precoFinal(){
         double total = 0;
         for (Order order: orders){
-            total += order.CalculateQuant();
+            total = total + order.CalculateQuant();
         }
         return total;
     }
