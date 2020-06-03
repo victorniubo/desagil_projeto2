@@ -49,7 +49,7 @@ public class ProdListAdaptor extends ArrayAdapter {
         if(row==null){
             row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_view_layout,parent,false);
             viewHolder = new ViewHolder();
-            viewHolder.textView1=row.findViewById(R.id.tvcategoria);
+            viewHolder.textView1=row.findViewById(R.id.tvlinha);
             viewHolder.textView2=row.findViewById(R.id.tvmodelo);
             viewHolder.textView3=row.findViewById(R.id.tvdescritivo);
             row.setTag(viewHolder);
@@ -57,7 +57,7 @@ public class ProdListAdaptor extends ArrayAdapter {
         else{
             viewHolder=(ViewHolder) row.getTag();
         }
-        viewHolder.textView1.setText(itens.get(position).getCategoria());
+        viewHolder.textView1.setText(itens.get(position).getLinha());
         viewHolder.textView2.setText(itens.get(position).getModelo());
         viewHolder.textView3.setText(itens.get(position).getDescritivo());
 

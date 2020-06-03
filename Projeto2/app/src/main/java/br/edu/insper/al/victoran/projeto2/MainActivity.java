@@ -3,6 +3,7 @@ package br.edu.insper.al.victoran.projeto2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -25,13 +27,15 @@ public class MainActivity extends AppCompatActivity {
     ProdListAdaptor adaptor;
     ArrayList<Product> prodlist = new ArrayList<>();
     ListView listaprods;
+    TextView textoItens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listaprods = findViewById(R.id.listView);
-
+        textoItens = findViewById(R.id.textView);
+        textoItens.setTextColor(Color.GREEN);
 //        EditText procura = findViewById(R.id.barraProcura);
         prodlist = ReadProducts();
 
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         listaprods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, PopUpProd.class);
                 intent = intent.putExtra("Produto", adaptor.itens.get(position));
                 startActivity(intent);
 
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(Product x:prodlist){
 
-                    if(x.getCategoria().toLowerCase().contains(newText.toLowerCase())){
+                    if(x.getLinha().toLowerCase().contains(newText.toLowerCase())){
                         int numero = Integer.parseInt(x.getId());
                         id.add(numero);
                         resultados.add(x);
