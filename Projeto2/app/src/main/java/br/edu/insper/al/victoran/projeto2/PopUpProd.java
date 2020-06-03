@@ -48,9 +48,7 @@ public class PopUpProd extends AppCompatActivity {
 
     private void showToast(String text) {
 
-
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-
         toast.show();
     }
 
@@ -157,18 +155,15 @@ public class PopUpProd extends AppCompatActivity {
 
 
 
-    }
-    private void showToast(String text) {
-
-        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-        toast.show();
 
 
-        Button addcart = findViewById(R.id.addcart);
+
+
+        
 
         addcart.setOnClickListener((view) -> {
 
-            showToast("Produtos Adicionados! ");
+            showToast("Produtos Adicionados!");
 
         });
 
