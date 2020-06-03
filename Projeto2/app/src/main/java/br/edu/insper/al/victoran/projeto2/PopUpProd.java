@@ -3,6 +3,7 @@ package br.edu.insper.al.victoran.projeto2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,18 +39,20 @@ public class PopUpProd extends AppCompatActivity {
     TextView PrecoC;
 
     ImageView imagem;
-
     Order order;
-    private LinkedList<Order> orders = new LinkedList<>();
-    Carrinho carrinho = new Carrinho(orders);
-
-
-    ArrayList<Product> referencia = new ArrayList<>();
+    private ArrayList<Order> orders;
+     // Carrinho carrinho = new Carrinho(orders);
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null){
+             ArrayList<Order> orders = new ArrayList<>();
+        }else {
+            orders = savedInstanceState.getParcelableArrayList("key");
+        }
+        Carrinho carrinho = new Carrinho(orders);
         setContentView(R.layout.activity_pop_up_prod);
         PUcat = findViewById(R.id.PUcat);
         PUlinha = findViewById(R.id.PUlinha);
@@ -147,8 +150,6 @@ public class PopUpProd extends AppCompatActivity {
             showToast("R$ " + s);
         });
 
-
-
     }
     private void showToast(String text) {
 
@@ -158,4 +159,12 @@ public class PopUpProd extends AppCompatActivity {
 
 
     }
+
+
+//    @Override
+    public void onSavedInstanceState(Bundle outState){
+        outState.putParcelableArrayList("key",orders);
+        super.onSaveInstanceState(outState);
+    }
+
 }
