@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.content.Intent;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -37,6 +39,14 @@ public class PopUpProd extends AppCompatActivity {
     ImageView imagem;
 
     ArrayList<Product> referencia = new ArrayList<>();
+
+    private void showToast(String text) {
+
+
+        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+
+        toast.show();
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -129,6 +139,13 @@ public class PopUpProd extends AppCompatActivity {
             }
         });
 
+        Button addcart = findViewById(R.id.addcart);
+
+        addcart.setOnClickListener((view) -> {
+
+            showToast("Produtos Adicionados! ");
+
+        });
 
     }
 }
