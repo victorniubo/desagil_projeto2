@@ -1,11 +1,12 @@
 package br.edu.insper.al.victoran.projeto2;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Carrinho {
-    private LinkedList<Order> orders;
-    public Carrinho(LinkedList<Order> orders){
-        this.orders = new LinkedList<>();
+    private ArrayList<Order> orders;
+    public Carrinho(ArrayList<Order> orders){
+        this.orders = orders;
     }
     public void addOrder(Order order){
         orders.add(order);
@@ -18,7 +19,7 @@ public class Carrinho {
         return total;
     }
 
-    public LinkedList<Order> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 }
