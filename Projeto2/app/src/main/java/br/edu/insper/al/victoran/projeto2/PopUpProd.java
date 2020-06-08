@@ -44,6 +44,12 @@ public class PopUpProd extends AppCompatActivity{
     Order order;
     ArrayList<Order> orders = new ArrayList<>();
 
+    private void showToast(String text) {
+
+        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,10 +144,7 @@ public class PopUpProd extends AppCompatActivity{
         });
 
     }
-    private void showToast(String text) {
-
-        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-        toast.show();
+   
     }
 
     public void onBackPressed() {
