@@ -8,6 +8,9 @@ public class Carrinho {
     public Carrinho(ArrayList<Order> orders){
         this.orders = orders;
     }
+    public void setLista(ArrayList<Order> orders){
+        this.orders = orders;
+    }
     public void addOrder(Order order){
         orders.add(order);
     }
@@ -18,8 +21,8 @@ public class Carrinho {
         }
         return total;
     }
-
     public ArrayList<Order> getOrders() {
         return orders;
     }
+
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -28,28 +29,54 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> prodlist = new ArrayList<>();
     ListView listaprods;
     TextView textoItens;
+    TextView textoItens2;
+    TextView textoItens3;
+    ArrayList<Order> orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listaprods = findViewById(R.id.listView);
-        textoItens = findViewById(R.id.textView);
-        textoItens.setTextColor(Color.GREEN);
-//        EditText procura = findViewById(R.id.barraProcura);
-        prodlist = ReadProducts();
 
+        listaprods = findViewById(R.id.listView);
+        textoItens = findViewById(R.id.titulo1);
+        textoItens.setTextColor(Color.BLACK);
+        textoItens2 = findViewById(R.id.titulo2);
+        textoItens2.setTextColor(Color.BLACK);
+        textoItens3 = findViewById(R.id.titulo3);
+        textoItens3.setTextColor(Color.BLACK);
+
+
+        Button pedido = findViewById(R.id.cart);
+        pedido.setVisibility(View.INVISIBLE);
+        prodlist = ReadProducts();
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
+        Intent intent = getIntent();
+        orders = intent.getParcelableArrayListExtra("lista");
+        if (orders == null) {orders = new ArrayList<>(); }
+
         listaprods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, PopUpProd.class);
-                intent = intent.putExtra("Produto", adaptor.itens.get(position));
+                intent.putExtra("Produto", adaptor.itens.get(position));
+                intent.putParcelableArrayListExtra("lista", orders);
+
                 startActivity(intent);
 
             }
         });
+
+
+        if(orders.size() != 0){
+        pedido.setVisibility(View.VISIBLE);
+        pedido.setOnClickListener((view) -> {
+            Intent intent2 = new Intent(MainActivity.this, PedidoOverview.class);
+            intent2.putExtra("listaFinal", orders);
+            intent2.putParcelableArrayListExtra("ListaFinal", orders);
+            startActivity(intent2);
+        });}
 
     }
     private ArrayList<Product> ReadProducts(){

@@ -3,8 +3,8 @@ package br.edu.insper.al.victoran.projeto2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -19,12 +19,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class PopUpProd extends AppCompatActivity {
+public class PopUpProd extends AppCompatActivity{
 
 
     TextView PUcat;
@@ -39,20 +40,14 @@ public class PopUpProd extends AppCompatActivity {
     TextView PrecoC;
 
     ImageView imagem;
+
     Order order;
-    private ArrayList<Order> orders;
-     // Carrinho carrinho = new Carrinho(orders);
+    ArrayList<Order> orders = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState == null){
-             ArrayList<Order> orders = new ArrayList<>();
-        }else {
-            orders = savedInstanceState.getParcelableArrayList("key");
-        }
-        Carrinho carrinho = new Carrinho(orders);
         setContentView(R.layout.activity_pop_up_prod);
         PUcat = findViewById(R.id.PUcat);
         PUlinha = findViewById(R.id.PUlinha);
@@ -67,6 +62,7 @@ public class PopUpProd extends AppCompatActivity {
 
         Intent intent = getIntent();
         Product product = intent.getParcelableExtra("Produto");
+        orders = intent.getParcelableArrayListExtra("lista");
         order = new Order(product);
 
         PUcat.setText("Categoria: "+product.getCategoria());
@@ -97,25 +93,15 @@ public class PopUpProd extends AppCompatActivity {
         NumberPicker np = findViewById(R.id.np);
         NumberPicker np2 = findViewById(R.id.np2);
         NumberPicker np3 = findViewById(R.id.np3);
-
         np.setMinValue(0);
-
         np.setMaxValue(100);
-
         np.setWrapSelectorWheel(false);
-
         np2.setMinValue(0);
-
         np2.setMaxValue(100);
-
         np2.setWrapSelectorWheel(false);
-
         np3.setMinValue(0);
-
         np3.setMaxValue(100);
-
         np3.setWrapSelectorWheel(false);
-
 
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -125,15 +111,16 @@ public class PopUpProd extends AppCompatActivity {
                 order.setQuantidade(newVal);
             }
         });
+
         np2.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
 
                 PrecoB.setText("B: "+newVal+"\nR$"+product.getPreco2());
                 order.setQuantidade(newVal);
-
             }
         });
+
         np3.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
@@ -145,9 +132,9 @@ public class PopUpProd extends AppCompatActivity {
         });
         Button addcart = findViewById(R.id.addcart);
         addcart.setOnClickListener((view) -> {
-            carrinho.addOrder(order);
-            String s = String.valueOf(carrinho.precoFinal());
-            showToast("R$ " + s);
+            String s = String.valueOf(order.getQuantidade());
+            orders.add(order);
+            showToast(s + " Unidades adicionadas");
         });
 
     }
@@ -155,16 +142,16 @@ public class PopUpProd extends AppCompatActivity {
 
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
-
-
-
     }
 
-
-//    @Override
-    public void onSavedInstanceState(Bundle outState){
-        outState.putParcelableArrayList("key",orders);
-        super.onSaveInstanceState(outState);
+    public void onBackPressed() {
+        Intent intent = new Intent(PopUpProd.this, MainActivity.class);
+        intent.putParcelableArrayListExtra("lista",orders);
+        startActivity(intent);
     }
 
 }
+
+
+//Resiliencia
+//elastic store energy
