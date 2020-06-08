@@ -3,6 +3,8 @@ package br.edu.insper.al.victoran.projeto2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 import static java.lang.Double.parseDouble;
 
 public class Order implements Parcelable {
@@ -13,6 +15,24 @@ public class Order implements Parcelable {
     this.produto = produto;
     this.quantidade = 0;
     }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+    public double CalculateQuant(){
+        double preco = parseDouble(produto.getPreco1());
+        double precoTotal = quantidade * preco;
+        return precoTotal;
+    }
+    public Product getProduto(){
+        return produto;
+    }
+
 
     protected Order(Parcel in) {
         produto = in.readParcelable(Product.class.getClassLoader());
@@ -31,25 +51,6 @@ public class Order implements Parcelable {
         }
     };
 
-    public void IncreQuantidade(){
-        quantidade ++;
-    }
-    public void DecQuantidade(){
-        quantidade --;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-    public double CalculateQuant(){
-        double preco = parseDouble(produto.getPreco1());
-        double precoTotal = quantidade * preco;
-        return precoTotal;
-    }
 
     @Override
     public int describeContents() {
@@ -59,6 +60,6 @@ public class Order implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(produto, flags);
-        //dest.writeInt(quantidade);
+        dest.writeInt(quantidade);
     }
 }

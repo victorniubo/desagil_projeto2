@@ -65,54 +65,5 @@ public class ProdListAdaptor extends ArrayAdapter {
 
     }
 
-    //    private Context mContext;
-//    int mResource;
-//    ArrayList<Product> objects;
-//
-//    public ProdListAdaptor(Context context, int resource, ArrayList<Product> objects) {
-//        super(context, resource, objects);
-//        mContext = context;
-//        mResource = resource;
-//        this.objects = objects;
-//    }
-//    public void update(ArrayList<Product> resultados){
-//
-//        objects = new ArrayList<>();
-//        objects.addAll(resultados);
-//        notifyDataSetChanged();
-//
-//    }
-//
-//
-//
-//
-//    @NonNull
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//
-//        String cat = getItem(position).getCategoria();
-//        String mod = getItem(position).getModelo();
-//        String desc = getItem(position).getDescritivo();
-//
-//
-//
-//        LayoutInflater inflater = LayoutInflater.from(mContext);
-//
-//        convertView = inflater.inflate(mResource, parent, false);
-//
-//        TextView tvCat = convertView.findViewById(R.id.tvcategoria);
-//        TextView tvMod = convertView.findViewById(R.id.tvmodelo);
-//        TextView tvDesc = convertView.findViewById(R.id.tvdescritivo);
-//
-//        tvCat.setText(cat);
-//        tvMod.setText(mod);
-//        tvDesc.setText(desc);
-//
-//        return convertView;
-//
-//
-//
-//
-//    }
 
 }
