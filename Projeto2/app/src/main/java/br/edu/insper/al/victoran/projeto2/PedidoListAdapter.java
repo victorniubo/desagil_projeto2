@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import java.text.DecimalFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -20,13 +20,7 @@ public class PedidoListAdapter extends ArrayAdapter {
         super(context, layout);
         this.orders=orders;
     }
-    public void update(ArrayList<Order> resultados){
 
-        orders = new ArrayList<>();
-        orders.addAll(resultados);
-        notifyDataSetChanged();
-
-    }
 
     public class ViewHolder{
         TextView prodDesc;
@@ -57,9 +51,13 @@ public class PedidoListAdapter extends ArrayAdapter {
         else{
             viewHolder=(ViewHolder) row.getTag();
         }
+        Double preco_int = orders.get(position).CalculateQuant();
+        String preço_redondo = new DecimalFormat("#,##0.00").format(preco_int);
+        String quantidade = String.valueOf(orders.get(position).getQuantidade());
+
         viewHolder.prodDesc.setText(orders.get(position).getProduto().getDescritivo());
-        viewHolder.prodPrec.setText(String.valueOf(orders.get(position).CalculateQuant()));
-        viewHolder.prodQuant.setText(orders.get(position).getQuantidade());
+        viewHolder.prodPrec.setText(preço_redondo);
+        viewHolder.prodQuant.setText(quantidade);
 
         return row;
 
