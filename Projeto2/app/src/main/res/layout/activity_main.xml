@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Linha"
+        android:text="  Linha"
         android:textAlignment="@id/tvlinha"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="20sp" />
@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Modelo"
+        android:text="    Modelo"
         android:textAlignment="@id/tvmodelo"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="20sp" />
@@ -41,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Descrição"
+        android:text="  Descrição"
         android:textAlignment="@id/tvdescritivo"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="20sp" />
@@ -62,6 +62,6 @@
         android:layout_alignParentBottom="true"
         android:background="#77E17B"
         android:text="Ver pedido"
-        android:textAlignment="center"></Button>
+        android:textAlignment="center" />
 
 </RelativeLayout>
