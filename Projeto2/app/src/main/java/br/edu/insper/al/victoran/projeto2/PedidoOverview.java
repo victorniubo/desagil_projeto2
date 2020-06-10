@@ -18,6 +18,7 @@ public class PedidoOverview extends AppCompatActivity {
     TextView descricao;
     TextView preco;
     TextView quantidade;
+    TextView total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class PedidoOverview extends AppCompatActivity {
         orders = intent.getParcelableArrayListExtra("ListaFinal");
         carrinho = new Carrinho(orders);
 
-//        descricao = findViewById(R.id.textView5);
+        total = findViewById(R.id.total);
 //        preco = findViewById(R.id.textView6);
 //        quantidade = findViewById(R.id.textView7);
 
@@ -42,6 +43,9 @@ public class PedidoOverview extends AppCompatActivity {
 
             adapter = new PedidoListAdapter(this, R.layout.adapter_order_layout,orders);
             listaOrders.setAdapter(adapter);
+            total.setText(String.valueOf(carrinho.precoFinal()));
+
+
 
         }
 
