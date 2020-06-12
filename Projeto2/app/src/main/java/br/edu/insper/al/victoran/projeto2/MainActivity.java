@@ -59,14 +59,6 @@ public class MainActivity extends AppCompatActivity {
         pedido.setVisibility(View.INVISIBLE);
         prodlist = ReadProducts();
         ReadVar();
-        System.out.println("TAMANHOOOOOOOO");
-        System.out.println(var0.size());
-        System.out.println(var1.size());
-        System.out.println(var2.size());
-        System.out.println(var3.size());
-        System.out.println(var4.size());
-        System.out.println(var5.size());
-        System.out.println(var6.size());
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
         Intent intent = getIntent();
@@ -76,13 +68,24 @@ public class MainActivity extends AppCompatActivity {
         listaprods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, PopUpProd.class);
-                Intent intent2 = new Intent(MainActivity.this, VarOverview.class);
-                intent.putExtra("Produto", adaptor.itens.get(position));
-                intent.putParcelableArrayListExtra("lista", orders);
+
                 if (prodlist.get(position).getVariacao().equals("-")){
+                    Intent intent = new Intent(MainActivity.this, PopUpProd.class);
+                    intent.putExtra("Produto", adaptor.itens.get(position));
+                    intent.putParcelableArrayListExtra("lista", orders);
                     startActivity(intent);
-                }else{startActivity(intent2);}
+                }else{
+                    Intent intent3 = new Intent(MainActivity.this, VarOverview.class);
+                    intent3.putExtra("Produto", adaptor.itens.get(position));
+                    intent3.putParcelableArrayListExtra("lista", orders);
+                    intent3.putParcelableArrayListExtra("Disco milho ramp",var0);
+                    intent3.putParcelableArrayListExtra("Disco milho baldan",var1);
+                    intent3.putParcelableArrayListExtra("Disco sorgo rampa",var2);
+                    intent3.putParcelableArrayListExtra("Disco soja ramp",var3);
+                    intent3.putParcelableArrayListExtra("Disco algodao ramp",var4);
+                    intent3.putParcelableArrayListExtra("Disco minduim",var5);
+                    intent3.putParcelableArrayListExtra("Anel",var6);
+                    startActivity(intent3);}
 
 
 
