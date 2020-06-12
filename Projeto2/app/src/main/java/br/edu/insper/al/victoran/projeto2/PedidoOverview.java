@@ -15,9 +15,6 @@ public class PedidoOverview extends AppCompatActivity {
     Carrinho carrinho;
     PedidoListAdapter adapter;
     ListView listaOrders;
-    TextView descricao;
-    TextView preco;
-    TextView quantidade;
     TextView total;
 
     @Override

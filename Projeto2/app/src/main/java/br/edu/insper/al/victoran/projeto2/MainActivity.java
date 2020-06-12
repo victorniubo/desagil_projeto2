@@ -60,10 +60,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, PopUpProd.class);
+                Intent intent2 = new Intent(MainActivity.this, VarOverview.class);
                 intent.putExtra("Produto", adaptor.itens.get(position));
                 intent.putParcelableArrayListExtra("lista", orders);
+                if (prodlist.get(position).getVariacao().equals("-")){
+                    startActivity(intent);
+                }else{startActivity(intent2);}
 
-                startActivity(intent);
+
+
 
             }
         });
@@ -90,8 +95,7 @@ public class MainActivity extends AppCompatActivity {
             //do arquivo
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
-                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9]);
-                //listaProdutos.add(new Product(TableLine[1], TableLine[2], TableLine[3], TableLine[4], TableLine[5], TableLine[6], TableLine[7], TableLine[8], TableLine[9]));
+                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10]);
                 prodlist.add(produto);
                 Log.d("MyActivity","criado:" + produto);
             }

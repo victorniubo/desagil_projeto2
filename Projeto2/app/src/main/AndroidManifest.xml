@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PedidoOverview"></activity>
+        <activity android:name=".VarOverview"></activity>
+        <activity android:name=".PedidoOverview" />
         <activity android:name=".PopUpProd" />
         <activity android:name=".MainActivity">
             <intent-filter>

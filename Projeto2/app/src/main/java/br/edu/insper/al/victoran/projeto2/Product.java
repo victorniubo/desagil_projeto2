@@ -14,8 +14,9 @@ public class Product implements Parcelable {
     private String preco1;
     private String preco2;
     private String preco3;
+    private String variacao;
 
-    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3) {
+    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String variacao) {
         this.id = id;
         this.categoria = categoria;
         this.linha = linha;
@@ -26,6 +27,7 @@ public class Product implements Parcelable {
         this.preco1 = preco1;
         this.preco2 = preco2;
         this.preco3 = preco3;
+        this.variacao = variacao;
     }
 
     protected Product(Parcel in) {
@@ -39,6 +41,7 @@ public class Product implements Parcelable {
         preco1 = in.readString();
         preco2 = in.readString();
         preco3 = in.readString();
+        variacao = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -62,6 +65,7 @@ public class Product implements Parcelable {
     public String getPreco1(){return preco1;}
     public String getPreco2(){return preco2;}
     public String getPreco3(){return preco3;}
+    public String getVariacao(){return variacao;}
 
     public String getId() {
         return id;
@@ -84,5 +88,6 @@ public class Product implements Parcelable {
         dest.writeString(preco1);
         dest.writeString(preco2);
         dest.writeString(preco3);
+        dest.writeString(variacao);
     }
 }
