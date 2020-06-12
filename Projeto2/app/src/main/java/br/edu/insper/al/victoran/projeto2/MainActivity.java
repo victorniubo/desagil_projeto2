@@ -21,12 +21,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ProdListAdaptor adaptor;
     ArrayList<Product> prodlist = new ArrayList<>();
+    ArrayList<Variantes> var0 = new ArrayList<>();
+    ArrayList<Variantes> var1 = new ArrayList<>();
+    ArrayList<Variantes> var2 = new ArrayList<>();
+    ArrayList<Variantes> var3 = new ArrayList<>();
+    ArrayList<Variantes> var4 = new ArrayList<>();
+    ArrayList<Variantes> var5 = new ArrayList<>();
+    ArrayList<Variantes> var6 = new ArrayList<>();
     ListView listaprods;
     TextView textoItens;
     TextView textoItens2;
@@ -50,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
         Button pedido = findViewById(R.id.cart);
         pedido.setVisibility(View.INVISIBLE);
         prodlist = ReadProducts();
+        ReadVar();
+        System.out.println("TAMANHOOOOOOOO");
+        System.out.println(var0.size());
+        System.out.println(var1.size());
+        System.out.println(var2.size());
+        System.out.println(var3.size());
+        System.out.println(var4.size());
+        System.out.println(var5.size());
+        System.out.println(var6.size());
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
         Intent intent = getIntent();
@@ -110,6 +127,45 @@ public class MainActivity extends AppCompatActivity {
         return prodlist;
     }
 
+    private void ReadVar(){
+        InputStream is = getResources().openRawResource(R.raw.variaveis);
+        BufferedReader StrR = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+        String Str;
+
+        try {
+
+            //Essa estrutura do looping while é clássica para ler cada linha
+            //do arquivo
+            while ((Str = StrR.readLine()) != null) {
+                String[] TableLine = Str.split(";");
+                Variantes variante = new Variantes(TableLine[2],TableLine[4],TableLine[5],TableLine[6],TableLine[7]);
+
+                if (variante != null){
+                    if (TableLine[4].equals("DISCO MILHO - RAMPFLOW")){
+                        var0.add(variante);
+                    } else if (TableLine[4].equals("DISCO MILHO - BALDAN")){
+                        var1.add(variante);
+                    } else if (TableLine[4].equals("DISCO SORGO - L-RAMPA")){
+                        var2.add(variante);
+                    } else if (TableLine[4].equals("DISCO SOJA - RAMPFLOW")){
+                        var3.add(variante);
+                    } else if (TableLine[4].equals("DISCO ALGODAO - RAMPFLOW")){
+                        var4.add(variante);
+                    } else if (TableLine[4].equals("DISCO AMENDOIM")){
+                        var5.add(variante);
+                    } else if (TableLine[4].equals("ANEL MILHO/FEIJAO")){
+                        var6.add(variante);
+                    }}
+            }
+            //Fechamos o buffer
+            StrR.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
