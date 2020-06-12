@@ -55,5 +55,16 @@
           android:layout_weight="1"
           android:textAlignment="center" />
 
+      <Button
+          android:id="@+id/finalizar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:layout_alignParentBottom="true"
+          android:background="#77E17B"
+          android:text="Finalizar Pedido"
+          android:textAlignment="center" />
+
+
 
 </RelativeLayout>
