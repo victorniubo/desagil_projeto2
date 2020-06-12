@@ -12,15 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/furos"
+            android:id="@+id/modelo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView1"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/furos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView2"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tamanho"
@@ -31,7 +40,7 @@
             android:gravity="center"
             android:text="TextView3"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </RelativeLayout>
