@@ -26,7 +26,7 @@ public class Order implements Parcelable {
 
 
     public double CalculateQuant(){
-        double preco = parseDouble(produto.getPreco1());
+        double preco  = produto.getprecoCerto();
         double precoTotal = quantidade * preco;
         return precoTotal;
     }

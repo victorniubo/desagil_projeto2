@@ -64,19 +64,41 @@
 
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/TituloSeletor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="------------------------------------------------------------------------------------------------------------"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/preco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Preços por tabela (A, B e C):"
+        android:text="Selecione a tabela:"
         android:textSize="20dp"
         android:layout_marginStart="10dp"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:id="@+id/myRadioGroup"
+        android:checkedButton="@+id/sound"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TabelaA"
+            android:text="Tabela A" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TabelaB"
+            android:layout_marginLeft="70sp"
+            android:text="Tabela B" />
+
+        <RadioButton
+            android:id="@+id/TabelaC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tabela C"
+            android:layout_marginLeft="70sp"/>
+
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,20 +107,20 @@
 
         <TextView
             android:id="@+id/precoA"
-            android:layout_width="wrap_content"
+            android:layout_width="77sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Quantidade"
             android:textAlignment="center"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/precoB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="Preço "
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="20dp"/>
@@ -108,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="Total"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="20dp"/>
@@ -120,24 +142,29 @@
         android:orientation="horizontal">
 
         <NumberPicker
-            android:id="@+id/np"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            />
-        <NumberPicker
             android:id="@+id/np2"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:scrollbarSize="15dp"
-            />
-        <NumberPicker
-            android:id="@+id/np3"
-            android:layout_width="wrap_content"
+            android:layout_marginStart="20sp"
+            android:scrollbarSize="15dp" />
+
+        <TextView
+            android:id="@+id/precoUnitario"
+            android:layout_width="20sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            />
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/precoTotal"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
