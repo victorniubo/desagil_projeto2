@@ -14,10 +14,11 @@ public class Product implements Parcelable {
     private String preco1;
     private String preco2;
     private String preco3;
+    private String variacao;
     private Double precoCerto;
     private String foto;
 
-    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String foto) {
+    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String variacao, String foto) {
         this.id = id;
         this.categoria = categoria;
         this.linha = linha;
@@ -28,6 +29,7 @@ public class Product implements Parcelable {
         this.preco1 = preco1;
         this.preco2 = preco2;
         this.preco3 = preco3;
+        this.variacao = variacao;
         if (Double.valueOf(preco1).equals(Double.valueOf(preco2)) && Double.valueOf(preco2).equals(Double.valueOf(preco3))){
             this.precoCerto = Double.valueOf(preco1);
         }else{
@@ -47,6 +49,7 @@ public class Product implements Parcelable {
         preco1 = in.readString();
         preco2 = in.readString();
         preco3 = in.readString();
+        variacao = in.readString();
         precoCerto = in.readDouble();
         foto = in.readString();
     }
@@ -77,7 +80,7 @@ public class Product implements Parcelable {
     public void setPrecoCerto(double preco){
         this.precoCerto = preco;
     }
-
+    public String getVariacao(){return variacao;}
 
     public String getId() {
         return id;
@@ -100,6 +103,7 @@ public class Product implements Parcelable {
         dest.writeString(preco1);
         dest.writeString(preco2);
         dest.writeString(preco3);
+        dest.writeString(variacao);
         dest.writeDouble(precoCerto);
         dest.writeString(foto);
     }

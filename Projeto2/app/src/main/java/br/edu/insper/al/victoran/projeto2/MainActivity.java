@@ -21,12 +21,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ProdListAdaptor adaptor;
     ArrayList<Product> prodlist = new ArrayList<>();
+    ArrayList<Variantes> var0 = new ArrayList<>();
+    ArrayList<Variantes> var1 = new ArrayList<>();
+    ArrayList<Variantes> var2 = new ArrayList<>();
+    ArrayList<Variantes> var3 = new ArrayList<>();
+    ArrayList<Variantes> var4 = new ArrayList<>();
+    ArrayList<Variantes> var5 = new ArrayList<>();
+    ArrayList<Variantes> var6 = new ArrayList<>();
     ListView listaprods;
     TextView textoItens;
     TextView textoItens2;
@@ -50,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Button pedido = findViewById(R.id.cart);
         pedido.setVisibility(View.INVISIBLE);
         prodlist = ReadProducts();
+        ReadVar();
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
         Intent intent = getIntent();
@@ -59,11 +68,27 @@ public class MainActivity extends AppCompatActivity {
         listaprods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, PopUpProd.class);
-                intent.putExtra("Produto", adaptor.itens.get(position));
-                intent.putParcelableArrayListExtra("lista", orders);
 
-                startActivity(intent);
+                if (prodlist.get(position).getVariacao().equals("-")){
+                    Intent intent = new Intent(MainActivity.this, PopUpProd.class);
+                    intent.putExtra("Produto", adaptor.itens.get(position));
+                    intent.putParcelableArrayListExtra("lista", orders);
+                    startActivity(intent);
+                }else{
+                    Intent intent3 = new Intent(MainActivity.this, VarOverview.class);
+                    intent3.putExtra("Produto", adaptor.itens.get(position));
+                    intent3.putParcelableArrayListExtra("lista", orders);
+                    intent3.putParcelableArrayListExtra("Disco milho ramp",var0);
+                    intent3.putParcelableArrayListExtra("Disco milho baldan",var1);
+                    intent3.putParcelableArrayListExtra("Disco sorgo rampa",var2);
+                    intent3.putParcelableArrayListExtra("Disco soja ramp",var3);
+                    intent3.putParcelableArrayListExtra("Disco algodao ramp",var4);
+                    intent3.putParcelableArrayListExtra("Disco minduim",var5);
+                    intent3.putParcelableArrayListExtra("Anel",var6);
+                    startActivity(intent3);}
+
+
+
 
             }
         });
@@ -90,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
             //do arquivo
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
-                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[11]);
-                //listaProdutos.add(new Product(TableLine[1], TableLine[2], TableLine[3], TableLine[4], TableLine[5], TableLine[6], TableLine[7], TableLine[8], TableLine[9]));
+
+                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10],,TableLine[11]);
                 prodlist.add(produto);
                 Log.d("MyActivity","criado:" + produto);
             }
@@ -106,6 +131,45 @@ public class MainActivity extends AppCompatActivity {
         return prodlist;
     }
 
+    private void ReadVar(){
+        InputStream is = getResources().openRawResource(R.raw.variaveis);
+        BufferedReader StrR = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+        String Str;
+
+        try {
+
+            //Essa estrutura do looping while é clássica para ler cada linha
+            //do arquivo
+            while ((Str = StrR.readLine()) != null) {
+                String[] TableLine = Str.split(";");
+                Variantes variante = new Variantes(TableLine[2],TableLine[4],TableLine[5],TableLine[6],TableLine[7]);
+
+                if (variante != null){
+                    if (TableLine[4].equals("DISCO MILHO - RAMPFLOW")){
+                        var0.add(variante);
+                    } else if (TableLine[4].equals("DISCO MILHO - BALDAN")){
+                        var1.add(variante);
+                    } else if (TableLine[4].equals("DISCO SORGO - L-RAMPA")){
+                        var2.add(variante);
+                    } else if (TableLine[4].equals("DISCO SOJA - RAMPFLOW")){
+                        var3.add(variante);
+                    } else if (TableLine[4].equals("DISCO ALGODAO - RAMPFLOW")){
+                        var4.add(variante);
+                    } else if (TableLine[4].equals("DISCO AMENDOIM")){
+                        var5.add(variante);
+                    } else if (TableLine[4].equals("ANEL MILHO/FEIJAO")){
+                        var6.add(variante);
+                    }}
+            }
+            //Fechamos o buffer
+            StrR.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
