@@ -113,11 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
             //Essa estrutura do looping while é clássica para ler cada linha
             //do arquivo
+            int contador = 0;
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
 
-                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10],,TableLine[11]);
+                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10],TableLine[11]);
                 prodlist.add(produto);
+                contador +=1;
+                System.out.println(contador);
+
                 Log.d("MyActivity","criado:" + produto);
             }
             //Fechamos o buffer
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-    }
+   }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
