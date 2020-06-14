@@ -43,6 +43,7 @@ public class Variantes implements Parcelable {
         return model;
     }
 
+
     public String getDescritivo() {
         return descritivo;
     }
