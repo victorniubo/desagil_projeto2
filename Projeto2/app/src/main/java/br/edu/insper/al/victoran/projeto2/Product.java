@@ -14,8 +14,10 @@ public class Product implements Parcelable {
     private String preco1;
     private String preco2;
     private String preco3;
+    private Double precoCerto;
+    private String foto;
 
-    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3) {
+    public Product(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String foto) {
         this.id = id;
         this.categoria = categoria;
         this.linha = linha;
@@ -26,6 +28,12 @@ public class Product implements Parcelable {
         this.preco1 = preco1;
         this.preco2 = preco2;
         this.preco3 = preco3;
+        if (Double.valueOf(preco1).equals(Double.valueOf(preco2)) && Double.valueOf(preco2).equals(Double.valueOf(preco3))){
+            this.precoCerto = Double.valueOf(preco1);
+        }else{
+            this.precoCerto = 0.00;
+        }
+        this.foto = foto;
     }
 
     protected Product(Parcel in) {
@@ -39,6 +47,8 @@ public class Product implements Parcelable {
         preco1 = in.readString();
         preco2 = in.readString();
         preco3 = in.readString();
+        precoCerto = in.readDouble();
+        foto = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -53,6 +63,7 @@ public class Product implements Parcelable {
         }
     };
 
+    public String getFoto(){return foto;}
     public String getCategoria(){return categoria;}
     public String getLinha(){return linha;}
     public String getModelo(){return modelo;}
@@ -62,6 +73,11 @@ public class Product implements Parcelable {
     public String getPreco1(){return preco1;}
     public String getPreco2(){return preco2;}
     public String getPreco3(){return preco3;}
+    public Double getprecoCerto(){return precoCerto;}
+    public void setPrecoCerto(double preco){
+        this.precoCerto = preco;
+    }
+
 
     public String getId() {
         return id;
@@ -84,5 +100,7 @@ public class Product implements Parcelable {
         dest.writeString(preco1);
         dest.writeString(preco2);
         dest.writeString(preco3);
+        dest.writeDouble(precoCerto);
+        dest.writeString(foto);
     }
 }

@@ -43,7 +43,7 @@ public class PedidoOverview extends AppCompatActivity {
 
             adapter = new PedidoListAdapter(this, R.layout.adapter_order_layout,orders);
             listaOrders.setAdapter(adapter);
-            total.setText(String.valueOf(carrinho.precoFinal()));
+            total.setText("O valor total é de: R$" +  String.valueOf(carrinho.precoFinal()));
 
 
 

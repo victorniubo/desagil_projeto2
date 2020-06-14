@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         pedido.setVisibility(View.VISIBLE);
         pedido.setOnClickListener((view) -> {
             Intent intent2 = new Intent(MainActivity.this, PedidoOverview.class);
-            intent2.putExtra("listaFinal", orders);
+            intent2.putExtra("ListaFinal", orders);
             intent2.putParcelableArrayListExtra("ListaFinal", orders);
             startActivity(intent2);
         });}
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             //do arquivo
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
-                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9]);
+                Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[11]);
                 //listaProdutos.add(new Product(TableLine[1], TableLine[2], TableLine[3], TableLine[4], TableLine[5], TableLine[6], TableLine[7], TableLine[8], TableLine[9]));
                 prodlist.add(produto);
                 Log.d("MyActivity","criado:" + produto);
