@@ -52,13 +52,40 @@ public class PedidoOverview extends AppCompatActivity {
 
         end = findViewById(R.id.finalizar);
         end.setOnClickListener(view -> {
-            String textFinal = "";
+            String textFinal = new String();
+            String labels = lenghtPadronizer("DESCRITIVO") + lenghtPadronizer("QUANTIDADE") +
+                    lenghtPadronizer("MODELO") + lenghtPadronizer("CÓDIGO") +
+                    lenghtPadronizer("TIPO") + lenghtPadronizer("CATEGORIA") +
+                    lenghtPadronizer("LINHA") + "\n";
+
             for (Order order : orders) {
                 Product produto = order.getProduto();
-                String text = "Categoria: " + produto.getCategoria() + "; Modelo: " +
-                        produto.getModelo() + "; Linha: " + produto.getLinha() + ", Código: " +
-                        produto.getCOD() + "; Tipo: " + produto.getTipo() + "; Descritivo: " +
-                        produto.getDescritivo() + "; Quantidade: " + order.getQuantidade() + "\n";
+                String quantidade = Integer.toString(order.getQuantidade());
+                String descritivo = produto.getDescritivo();
+                int descSize = descritivo.length();
+                String second = new String();
+                String pulaLinha = new String();
+                for (int n = 0; n < 6; n++){
+                    pulaLinha += "--------------------|";
+                }
+                if (descSize >= 20){
+                    String first = descritivo.substring(0,20);
+                    if (descSize >= 40){
+                        second = descritivo.substring(20,40);
+                        String third = descritivo.substring(40,descSize);
+                        descritivo = lenghtPadronizer(first) + pulaLinha +"\n" +
+                                lenghtPadronizer(second) + pulaLinha + "\n" +
+                                lenghtPadronizer(third);
+                    } else{
+                    second = descritivo.substring(20,descSize);
+                    descritivo = lenghtPadronizer(first) + pulaLinha + "\n" +
+                            lenghtPadronizer(second);
+                    }
+                }
+                String text = descritivo + lenghtPadronizer(quantidade) + 
+                        lenghtPadronizer(produto.getModelo()) + lenghtPadronizer(produto.getCOD() ) +
+                        lenghtPadronizer(produto.getTipo()) + lenghtPadronizer(produto.getCategoria()) +
+                        lenghtPadronizer(produto.getLinha()) + "\n";
                 textFinal += text;
             }
 
@@ -66,11 +93,12 @@ public class PedidoOverview extends AppCompatActivity {
 
             try {
                 fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+                fos.write(labels.getBytes());
                 fos.write(textFinal.getBytes());
 
                 Toast.makeText(this, "Salvo em " + getFilesDir() + "/" + FILE_NAME,
                         Toast.LENGTH_LONG).show();
-                System.out.println(textFinal);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -87,6 +115,22 @@ public class PedidoOverview extends AppCompatActivity {
         });
 
         }
+}
+    public String lenghtPadronizer(String str){
+//        if (str.length() > 19){
+//            String first = str.substring(0,20);
+//            int size = str.length();
+//            String second = str.substring(20, size);
+//            str = lenghtPadronizer(first) + "\n" + lenghtPadronizer(second);
+//        }
+//        else {
+            while (str.length() <= 19){
+                str += "-";
+            }
+            str += "|";
+//        }
 
 
-}}
+        return str;
+
+    }}
