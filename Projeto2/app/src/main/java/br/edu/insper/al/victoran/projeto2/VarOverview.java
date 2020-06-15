@@ -56,4 +56,5 @@ public class VarOverview extends AppCompatActivity {
         listaVar.setAdapter(adapter);
         nomeProduto.setText(product.getVar().get(0).getDescritivo());
 
+
 }}

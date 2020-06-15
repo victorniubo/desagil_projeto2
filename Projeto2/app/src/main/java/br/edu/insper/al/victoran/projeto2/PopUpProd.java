@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,7 +41,6 @@ public class PopUpProd extends AppCompatActivity{
     Order order;
     ArrayList<Order> orders = new ArrayList<>();
     Product product;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,6 @@ public class PopUpProd extends AppCompatActivity{
 
 
         Intent intent = getIntent();
-        product = intent.getParcelableExtra("Produto");
         orders = intent.getParcelableArrayListExtra("lista");
         order = new Order(product);
 
@@ -104,7 +103,6 @@ public class PopUpProd extends AppCompatActivity{
 
 
         mDrawableName = product.getFoto();
-
         if (mDrawableName.equals("-")){
             imagem.setImageResource(R.drawable.jassyfoto);
 
@@ -161,8 +159,6 @@ public class PopUpProd extends AppCompatActivity{
         });
 
     }
-   
-
 
     public void onBackPressed() {
         Intent intent = new Intent(PopUpProd.this, MainActivity.class);
