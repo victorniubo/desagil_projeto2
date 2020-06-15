@@ -81,6 +81,7 @@ public class PopUpProd extends AppCompatActivity{
 
 
         Intent intent = getIntent();
+        product = intent.getParcelableExtra("Produto");
         orders = intent.getParcelableArrayListExtra("lista");
         order = new Order(product);
 
