@@ -11,8 +11,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/prodDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView1"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/variacao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,9 +44,8 @@
 
         <NumberPicker
             android:id="@+id/npQnt"
-            android:layout_width="130dp"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
             android:scrollbarSize="15dp" />
     </LinearLayout>
 
