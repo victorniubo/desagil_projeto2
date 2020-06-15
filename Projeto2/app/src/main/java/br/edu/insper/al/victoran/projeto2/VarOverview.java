@@ -32,8 +32,6 @@ public class VarOverview extends AppCompatActivity {
     TextView nomeProduto;
     VarListAdapter adapter;
     ProductEx product;
-    Product prod;
-    Order order;
     ArrayList<Order> orders;
 
     @Override
@@ -42,11 +40,8 @@ public class VarOverview extends AppCompatActivity {
         setContentView(R.layout.activity_var_overview);
 
         Intent intent = getIntent();
-        if(intent != null) {
-            product = intent.getParcelableExtra("Produto1");
-            orders = intent.getParcelableArrayListExtra("lista1");
-        }
-        //order = new Order(product);
+        product = intent.getParcelableExtra("Produto");
+        orders = intent.getParcelableArrayListExtra("lista");
 
 
         listaVar = findViewById(R.id.listView3);
@@ -55,6 +50,25 @@ public class VarOverview extends AppCompatActivity {
         adapter = new VarListAdapter(this, R.layout.adapter_var_layout,product.getVar());
         listaVar.setAdapter(adapter);
         nomeProduto.setText(product.getVar().get(0).getDescritivo());
+        listaVar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    product.setIndicador(position);
+                    Intent intent = new Intent(VarOverview.this, PopUpProd.class);
+                    intent.putExtra("Produto", product);
+                    intent.putParcelableArrayListExtra("lista", orders);
+                    startActivity(intent);
+        }});
 
 
-}}
+}
+    public void onBackPressed() {
+
+            Intent intent = new Intent(VarOverview.this, MainActivity.class);
+            intent.putParcelableArrayListExtra("lista",orders);
+            startActivity(intent);
+
+    }
+
+}

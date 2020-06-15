@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         Button pedido = findViewById(R.id.cart);
         pedido.setVisibility(View.INVISIBLE);
         prodlist = ReadProducts();
-        ReadVar();
         adaptor = new ProdListAdaptor(this, R.layout.adapter_view_layout,prodlist);
         listaprods.setAdapter(adaptor);
         Intent intent = getIntent();
@@ -69,16 +68,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (prodlist.get(position).getVariacao().equals("-")){
+                if (adaptor.itens.get(position).getVariacao().equals("-")){
                     Intent intent = new Intent(MainActivity.this, PopUpProd.class);
                     intent.putExtra("Produto", adaptor.itens.get(position));
                     intent.putParcelableArrayListExtra("lista", orders);
                     startActivity(intent);
                 }else{
                     Intent intent3 = new Intent(MainActivity.this, VarOverview.class);
-                    intent3.putExtra("Produto1", adaptor.itens.get(position));
-                    intent3.putParcelableArrayListExtra("lista1", orders);
+                    intent3.putExtra("Produto", adaptor.itens.get(position));
+                    intent3.putParcelableArrayListExtra("lista", orders);
+
                     startActivity(intent3);}
+
             }
         });
 
@@ -102,27 +103,22 @@ public class MainActivity extends AppCompatActivity {
         try {
             //Essa estrutura do looping while é clássica para ler cada linha
             //do arquivo
-            int contador = 0;
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
                 if (TableLine[10].equals("-")){
                 Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10],TableLine[11]);
                 prodlist.add(produto);}
-                else if (TableLine[10].equals("DISCO MILHO - RAMPFLOW")){
+                else if (TableLine[6].equals("DISCO MILHO - RAMPFLOW")){
                           Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var0);
                           prodlist.add(produto);
-                    System.out.println(var0);
                 }
                   else if (TableLine[6].equals("DISCO MILHO - BALDAN")){
                     Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var1);
                     prodlist.add(produto);
-                    System.out.println("agora vai");
-                    System.out.println(var1);
                 }
                   else if (TableLine[6].equals("DISCO SORGO - L-RAMPA")){
                     Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var2);
                     prodlist.add(produto);
-                    System.out.println("teste");
                 }
                   else if (TableLine[6].equals("DISCO SOJA - RAMPFLOW")){
                     Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var3);

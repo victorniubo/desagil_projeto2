@@ -15,6 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -41,6 +43,7 @@ public class PopUpProd extends AppCompatActivity{
     Order order;
     ArrayList<Order> orders = new ArrayList<>();
     Product product;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +81,6 @@ public class PopUpProd extends AppCompatActivity{
         PrecoTotal = findViewById(R.id.precoTotal);
 
         Button addcart = findViewById(R.id.addcart);
-
-
         Intent intent = getIntent();
         product = intent.getParcelableExtra("Produto");
         orders = intent.getParcelableArrayListExtra("lista");
@@ -100,6 +101,11 @@ public class PopUpProd extends AppCompatActivity{
             PUmod.setTextSize(0);
         }else{
             PUmod.setText("Modelo: "+product.getModelo());
+        }if(product.getVariacao().equals("-")){
+            PUtipo.setTextSize(0);
+        }else{
+           int pos = product.getIndicador();
+           PUtipo.setText("Medida e Furos: " +  product.getVar().get(pos).getMedida() + "MM, " + product.getVar().get(pos).getFuro() + " furos");
         }
 
 
@@ -146,9 +152,9 @@ public class PopUpProd extends AppCompatActivity{
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
                 order.setQuantidade(newVal);
-                long tot = Math.round(order.CalculateQuant());
+                String preço_redondo = new DecimalFormat("#,##0.00").format(order.CalculateQuant());
 
-                PrecoTotal.setText(String.valueOf(tot));
+                PrecoTotal.setText(preço_redondo);
             }
         });
 
@@ -162,9 +168,18 @@ public class PopUpProd extends AppCompatActivity{
     }
 
     public void onBackPressed() {
+
+        if (product.getVar() == null){
         Intent intent = new Intent(PopUpProd.this, MainActivity.class);
         intent.putParcelableArrayListExtra("lista",orders);
-        startActivity(intent);
+        startActivity(intent);}
+        else{
+            Intent intent4 = new Intent(PopUpProd.this, VarOverview.class);
+            intent4.putExtra("Produto", product);
+            intent4.putParcelableArrayListExtra("lista", orders);
+            startActivity(intent4);
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
