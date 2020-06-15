@@ -83,7 +83,7 @@ public class PedidoOverview extends AppCompatActivity {
                     }
                 }
                 String text = descritivo + lenghtPadronizer(quantidade) +
-                        lenghtPadronizer(("R$" + produto.getprecoCerto().toString())) +
+                        lenghtPadronizer(("R$" + order.CalculateQuant())) +
                         lenghtPadronizer(produto.getModelo()) + lenghtPadronizer(produto.getCOD() ) +
                         lenghtPadronizer(produto.getTipo()) + lenghtPadronizer(produto.getCategoria()) +
                         lenghtPadronizer(produto.getLinha()) + "\n";
