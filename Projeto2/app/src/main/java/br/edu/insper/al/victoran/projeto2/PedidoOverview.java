@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,10 +26,28 @@ public class PedidoOverview extends AppCompatActivity {
     Button end;
     private static final String FILE_NAME = "pedido.txt";
 
+    Button sharebtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_overview);
+
+        sharebtn = (Button) findViewById(R.id.finalizar); // não sei qual seria o botão para envio
+        sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent (Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareBody = "aqui vai ser inserido o texto a ser enviado";
+                String sharesub = "corpo da mensagem";
+
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+
+                startActivity(Intent.createChooser(shareIntent, "Share using"));
+            }
+        });
 
         Intent intent = getIntent();
         if (orders != null){
