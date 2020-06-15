@@ -76,20 +76,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else{
                     Intent intent3 = new Intent(MainActivity.this, VarOverview.class);
-                    intent3.putExtra("Produto", adaptor.itens.get(position));
-                    intent3.putParcelableArrayListExtra("lista", orders);
-                    intent3.putParcelableArrayListExtra("Disco milho ramp",var0);
-                    intent3.putParcelableArrayListExtra("Disco milho baldan",var1);
-                    intent3.putParcelableArrayListExtra("Disco sorgo rampa",var2);
-                    intent3.putParcelableArrayListExtra("Disco soja ramp",var3);
-                    intent3.putParcelableArrayListExtra("Disco algodao ramp",var4);
-                    intent3.putParcelableArrayListExtra("Disco minduim",var5);
-                    intent3.putParcelableArrayListExtra("Anel",var6);
+                    intent3.putExtra("Produto1", adaptor.itens.get(position));
+                    intent3.putParcelableArrayListExtra("lista1", orders);
                     startActivity(intent3);}
-
-
-
-
             }
         });
 
@@ -108,21 +97,51 @@ public class MainActivity extends AppCompatActivity {
         InputStream is = getResources().openRawResource(R.raw.produtos);
         BufferedReader StrR = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String Str;
+        ReadVar();
 
         try {
-
             //Essa estrutura do looping while é clássica para ler cada linha
             //do arquivo
             int contador = 0;
             while ((Str = StrR.readLine()) != null) {
                 String[] TableLine = Str.split(",");
-
+                if (TableLine[10].equals("-")){
                 Product produto = new Product(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9], TableLine[10],TableLine[11]);
-                prodlist.add(produto);
-                contador +=1;
-                System.out.println(contador);
+                prodlist.add(produto);}
+                else if (TableLine[10].equals("DISCO MILHO - RAMPFLOW")){
+                          Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var0);
+                          prodlist.add(produto);
+                    System.out.println(var0);
+                }
+                  else if (TableLine[6].equals("DISCO MILHO - BALDAN")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var1);
+                    prodlist.add(produto);
+                    System.out.println("agora vai");
+                    System.out.println(var1);
+                }
+                  else if (TableLine[6].equals("DISCO SORGO - L-RAMPA")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var2);
+                    prodlist.add(produto);
+                    System.out.println("teste");
+                }
+                  else if (TableLine[6].equals("DISCO SOJA - RAMPFLOW")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var3);
+                    prodlist.add(produto);
+                }
+                  else if (TableLine[6].equals("DISCO ALGODAO - RAMPFLOW")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var4);
+                    prodlist.add(produto);
+                }
+                  else if (TableLine[6].equals("DISCO AMENDOIM")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var5);
+                    prodlist.add(produto);
+                }
+                  else if (TableLine[6].equals("ANEL MILHO/FEIJAO")){
+                    Product produto = new ProductEx(TableLine[0], TableLine[1],TableLine[2],TableLine[3],TableLine[4],TableLine[5],TableLine[6],TableLine[7],TableLine[8],TableLine[9],TableLine[10],TableLine[11],var6);
+                    prodlist.add(produto);
+                }
 
-                Log.d("MyActivity","criado:" + produto);
+
             }
             //Fechamos o buffer
             StrR.close();

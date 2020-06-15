@@ -56,7 +56,7 @@ public class VarListAdapter extends ArrayAdapter {
 
         viewHolder.furos.setText(vars.get(position).getFuro());
         viewHolder.tamanho.setText(vars.get(position).getMedida());
-        viewHolder.modelo.setText(vars.get(position).getModel());
+        viewHolder.modelo.setText(vars.get(position).getCor());
 
         return row;
 
