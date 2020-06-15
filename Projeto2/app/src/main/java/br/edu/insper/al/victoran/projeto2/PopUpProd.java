@@ -83,9 +83,6 @@ public class PopUpProd extends AppCompatActivity{
         Intent intent = getIntent();
         orders = intent.getParcelableArrayListExtra("lista");
         order = new Order(product);
-        int pos = intent.getIntExtra("posicao",2222222);
-        product = intent.getParcelableExtra("Produto");
-        System.out.println(pos);
 
         PUcat.setText("Categoria: "+product.getCategoria());
         PUlinha.setText("Linha: "+product.getLinha());
