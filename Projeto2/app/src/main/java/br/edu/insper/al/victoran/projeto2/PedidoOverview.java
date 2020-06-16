@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PedidoOverview extends AppCompatActivity {
@@ -37,8 +38,11 @@ public class PedidoOverview extends AppCompatActivity {
         if (orders != null){
         orders = intent.getParcelableArrayListExtra("ListaFinal");
         carrinho = new Carrinho(orders);
+        String preço_final = new DecimalFormat("#,##0.00").format(carrinho.precoFinal());
 
         total = findViewById(R.id.total);
+        total.setText("TOTAL: R$" + preço_final);
+
 //        preco = findViewById(R.id.textView6);
 //        quantidade = findViewById(R.id.textView7);
 
@@ -60,18 +64,23 @@ public class PedidoOverview extends AppCompatActivity {
                     lenghtPadronizer("PREÇO") + lenghtPadronizer("MODELO") +
                     lenghtPadronizer("CÓDIGO") + lenghtPadronizer("TIPO") +
                     lenghtPadronizer("CATEGORIA") + lenghtPadronizer("LINHA") +
-                    lenghtPadronizer("FUROS/MEDIDAS/COR") + "\n";
+                    lenghtPadronizer("FUROS/MEDIDAS") + "\n";
 
             for (Order order : orders) {
                 Product produto = order.getProduto();
                 String quantidade = Integer.toString(order.getQuantidade());
                 String descritivo = produto.getDescritivo();
                 int descSize = descritivo.length();
-                String second = new String();
+                String second;
                 String pulaLinha = new String();
-                for (int n = 0; n < 6; n++){
-                    pulaLinha += "--------------------|";
+                String diviProd = new String();
+                for (int n = 0; n < 8; n++){
+                    pulaLinha += "                    |";
                 }
+                for (int n = 0; n <=8; n++){
+                    diviProd += "---------------------";
+                }
+                diviProd += "\n";
                 if (descSize >= 20){
                     String first = descritivo.substring(0,20);
                     if (descSize >= 40){
@@ -81,16 +90,23 @@ public class PedidoOverview extends AppCompatActivity {
                                 lenghtPadronizer(second) + pulaLinha + "\n" +
                                 lenghtPadronizer(third);
                     } else{
-                    second = descritivo.substring(20,descSize);
-                    descritivo = lenghtPadronizer(first) + pulaLinha + "\n" +
-                            lenghtPadronizer(second);
+                        second = descritivo.substring(20,descSize);
+                        descritivo = lenghtPadronizer(first) + pulaLinha + "\n" +
+                                lenghtPadronizer(second);
                     }
+
+                } else {
+                    descritivo = lenghtPadronizer(descritivo);
                 }
-                String text = descritivo + lenghtPadronizer(quantidade) +
-                        lenghtPadronizer(("R$" + order.CalculateQuant())) +
+
+                String preço_redondo = new DecimalFormat("#,##0.00").format(order.CalculateQuant());
+
+                String text = diviProd + descritivo + lenghtPadronizer(quantidade) +
+                        lenghtPadronizer(("R$" + preço_redondo)) +
                         lenghtPadronizer(produto.getModelo()) + lenghtPadronizer(produto.getCOD() ) +
                         lenghtPadronizer(produto.getTipo()) + lenghtPadronizer(produto.getCategoria()) +
-                        lenghtPadronizer(produto.getLinha()) + "\n";
+                        lenghtPadronizer(produto.getLinha()) + lenghtPadronizer(order.getVariante()) +
+                        "\n";
                 textFinal += text;
             }
 
@@ -131,15 +147,9 @@ public class PedidoOverview extends AppCompatActivity {
         }
 }
     public String lenghtPadronizer(String str){
-//        if (str.length() > 19){
-//            String first = str.substring(0,20);
-//            int size = str.length();
-//            String second = str.substring(20, size);
-//            str = lenghtPadronizer(first) + "\n" + lenghtPadronizer(second);
-//        }
-//        else {
+
             while (str.length() <= 19){
-                str += "-";
+                str += " ";
             }
             str += "|";
 //        }

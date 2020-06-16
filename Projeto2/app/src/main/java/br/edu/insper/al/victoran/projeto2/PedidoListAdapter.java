@@ -67,7 +67,8 @@ public class PedidoListAdapter extends ArrayAdapter {
             viewHolder.variacao.setText("-");
         }else {
             int pos = orders.get(position).getProduto().getIndicador();
-            viewHolder.variacao.setText(orders.get(position).getProduto().getVar().get(pos).getFuro() + "\n"+ orders.get(position).getProduto().getVar().get(pos).getMedida());
+            viewHolder.variacao.setText(orders.get(position).getProduto().getVar().get(pos).getFuro() +
+                    "\n"+ orders.get(position).getProduto().getVar().get(pos).getMedida());
         }
 
         viewHolder.prodDesc.setText(orders.get(position).getProduto().getDescritivo());
@@ -78,6 +79,7 @@ public class PedidoListAdapter extends ArrayAdapter {
                 orders.get(position).setQuantidade(newVal);
                 String newPrecoRed = new DecimalFormat("#,##0.00").format(orders.get(position).CalculateQuant());
                 viewHolder.prodPrec.setText(newPrecoRed);
+
             }
         });
 
