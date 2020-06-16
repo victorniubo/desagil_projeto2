@@ -41,6 +41,7 @@
         android:text="TextView3"
         android:textAlignment="center"
         android:textSize="15sp" />
+
 </LinearLayout>
 
 </RelativeLayout>

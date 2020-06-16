@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import java.text.DecimalFormat;
 import androidx.annotation.NonNull;
@@ -25,7 +26,8 @@ public class PedidoListAdapter extends ArrayAdapter {
     public class ViewHolder{
         TextView prodDesc;
         TextView prodPrec;
-        TextView prodQuant;
+        TextView variacao;
+        NumberPicker altQuant;
     }
     @Override
     public int getCount() {
@@ -43,9 +45,16 @@ public class PedidoListAdapter extends ArrayAdapter {
         if(row==null){
             row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_order_layout,parent,false);
             viewHolder = new ViewHolder();
-            viewHolder.prodDesc=row.findViewById(R.id.prodDesc);
-            viewHolder.prodPrec=row.findViewById(R.id.prodPrec);
-            viewHolder.prodQuant=row.findViewById(R.id.prodQuant);
+            viewHolder.prodDesc = row.findViewById(R.id.prodDesc);
+            viewHolder.prodPrec = row.findViewById(R.id.prodPrec);
+            viewHolder.altQuant = row.findViewById(R.id.npQnt);
+            viewHolder.variacao = row.findViewById(R.id.variacao);
+            viewHolder.altQuant.setMinValue(0);
+            viewHolder.altQuant.setMaxValue(300);
+            viewHolder.altQuant.setWrapSelectorWheel(false);
+            viewHolder.altQuant.setValue(orders.get(position).getQuantidade());
+
+
             row.setTag(viewHolder);
         }
         else{
@@ -53,11 +62,24 @@ public class PedidoListAdapter extends ArrayAdapter {
         }
         Double preco_int = orders.get(position).CalculateQuant();
         String preço_redondo = new DecimalFormat("#,##0.00").format(preco_int);
-        String quantidade = String.valueOf(orders.get(position).getQuantidade());
+//        String quantidade = String.valueOf(orders.get(position).getQuantidade());
+        if (orders.get(position).getProduto().getVar() == null){
+            viewHolder.variacao.setText("-");
+        }else {
+            int pos = orders.get(position).getProduto().getIndicador();
+            viewHolder.variacao.setText(orders.get(position).getProduto().getVar().get(pos).getFuro() + "\n"+ orders.get(position).getProduto().getVar().get(pos).getMedida());
+        }
 
         viewHolder.prodDesc.setText(orders.get(position).getProduto().getDescritivo());
         viewHolder.prodPrec.setText(preço_redondo);
-        viewHolder.prodQuant.setText(quantidade);
+        viewHolder.altQuant.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                orders.get(position).setQuantidade(newVal);
+                String newPrecoRed = new DecimalFormat("#,##0.00").format(orders.get(position).CalculateQuant());
+                viewHolder.prodPrec.setText(newPrecoRed);
+            }
+        });
 
         return row;
 

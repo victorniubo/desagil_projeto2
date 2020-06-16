@@ -73,9 +73,9 @@ public class PedidoOverview extends AppCompatActivity {
         end.setOnClickListener(view -> {
             String textFinal = new String();
             String labels = lenghtPadronizer("DESCRITIVO") + lenghtPadronizer("QUANTIDADE") +
-                    lenghtPadronizer("MODELO") + lenghtPadronizer("CÓDIGO") +
-                    lenghtPadronizer("TIPO") + lenghtPadronizer("CATEGORIA") +
-                    lenghtPadronizer("LINHA") + "\n";
+                    lenghtPadronizer("PREÇO") + lenghtPadronizer("MODELO") +
+                    lenghtPadronizer("CÓDIGO") + lenghtPadronizer("TIPO") +
+                    lenghtPadronizer("CATEGORIA") + lenghtPadronizer("LINHA") + "\n";
 
             for (Order order : orders) {
                 Product produto = order.getProduto();
@@ -101,7 +101,8 @@ public class PedidoOverview extends AppCompatActivity {
                             lenghtPadronizer(second);
                     }
                 }
-                String text = descritivo + lenghtPadronizer(quantidade) + 
+                String text = descritivo + lenghtPadronizer(quantidade) +
+                        lenghtPadronizer(("R$" + order.CalculateQuant())) +
                         lenghtPadronizer(produto.getModelo()) + lenghtPadronizer(produto.getCOD() ) +
                         lenghtPadronizer(produto.getTipo()) + lenghtPadronizer(produto.getCategoria()) +
                         lenghtPadronizer(produto.getLinha()) + "\n";

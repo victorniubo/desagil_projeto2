@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import java.text.DecimalFormat;
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class VarListAdapter extends ArrayAdapter {
         TextView furos;
         TextView tamanho;
         TextView modelo;
+        TextView cor;
 
     }
     @Override
@@ -47,6 +49,7 @@ public class VarListAdapter extends ArrayAdapter {
             viewHolder.furos=row.findViewById(R.id.furos);
             viewHolder.tamanho=row.findViewById(R.id.tamanho);
             viewHolder.modelo=row.findViewById(R.id.modelo);
+            viewHolder.cor = row.findViewById(R.id.cor);
             row.setTag(viewHolder);
         }
         else{
@@ -57,6 +60,7 @@ public class VarListAdapter extends ArrayAdapter {
         viewHolder.furos.setText(vars.get(position).getFuro());
         viewHolder.tamanho.setText(vars.get(position).getMedida());
         viewHolder.modelo.setText(vars.get(position).getModel());
+        viewHolder.cor.setText(vars.get(position).getCor());
 
         return row;
 

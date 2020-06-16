@@ -3,6 +3,8 @@ package br.edu.insper.al.victoran.projeto2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Product implements Parcelable {
     private String id;
     private String categoria;
@@ -106,5 +108,12 @@ public class Product implements Parcelable {
         dest.writeString(variacao);
         dest.writeDouble(precoCerto);
         dest.writeString(foto);
+    }
+
+    public ArrayList<Variantes> getVar(){
+        return null;
+    }
+    public int getIndicador(){
+        return 134533;
     }
 }
