@@ -1,8 +1,10 @@
 package br.edu.insper.al.victoran.projeto2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,7 +59,8 @@ public class PedidoOverview extends AppCompatActivity {
             String labels = lenghtPadronizer("DESCRITIVO") + lenghtPadronizer("QUANTIDADE") +
                     lenghtPadronizer("PREÇO") + lenghtPadronizer("MODELO") +
                     lenghtPadronizer("CÓDIGO") + lenghtPadronizer("TIPO") +
-                    lenghtPadronizer("CATEGORIA") + lenghtPadronizer("LINHA") + "\n";
+                    lenghtPadronizer("CATEGORIA") + lenghtPadronizer("LINHA") +
+                    lenghtPadronizer("FUROS/MEDIDAS/COR") + "\n";
 
             for (Order order : orders) {
                 Product produto = order.getProduto();
@@ -97,8 +101,8 @@ public class PedidoOverview extends AppCompatActivity {
                 fos.write(labels.getBytes());
                 fos.write(textFinal.getBytes());
 
-                Toast.makeText(this, "Salvo em " + getFilesDir() + "/" + FILE_NAME,
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "Salvo em " + getFilesDir() + "/" + FILE_NAME,
+//                        Toast.LENGTH_LONG).show();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -113,6 +117,15 @@ public class PedidoOverview extends AppCompatActivity {
                     }
                 }
             }
+            Uri path = FileProvider.getUriForFile(this, "br.edu.insper.al.victoran.projeto2",
+                    new File(getFilesDir() + "/" + FILE_NAME));
+
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, path);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            shareIntent.setType("message/rfc822");
+            startActivity(Intent.createChooser(shareIntent, "Share..."));
         });
 
         }
