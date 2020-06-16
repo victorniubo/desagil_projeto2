@@ -10,10 +10,12 @@ import static java.lang.Double.parseDouble;
 public class Order implements Parcelable {
     private Product produto;
     private int quantidade;
+    private String variante;
 
     public Order(Product produto){
     this.produto = produto;
     this.quantidade = 0;
+    this.variante = "-";
     }
 
     public void setQuantidade(int quantidade) {
@@ -29,6 +31,7 @@ public class Order implements Parcelable {
         double preco  = produto.getprecoCerto();
         double precoTotal = quantidade * preco;
         return precoTotal;
+
     }
     public Product getProduto(){
         return produto;
@@ -38,6 +41,7 @@ public class Order implements Parcelable {
     protected Order(Parcel in) {
         produto = in.readParcelable(Product.class.getClassLoader());
         quantidade = in.readInt();
+        variante = in.readString();
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {
@@ -62,5 +66,14 @@ public class Order implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(produto, flags);
         dest.writeInt(quantidade);
+        dest.writeString(variante);
+    }
+
+    public String getVariante() {
+        return variante;
+    }
+
+    public void setVariante(String variante) {
+        this.variante = variante;
     }
 }

@@ -105,7 +105,10 @@ public class PopUpProd extends AppCompatActivity{
             PUtipo.setTextSize(0);
         }else{
            int pos = product.getIndicador();
-           PUtipo.setText("Medida e Furos: " +  product.getVar().get(pos).getMedida() + "MM, " + product.getVar().get(pos).getFuro() + " furos");
+           String furos = product.getVar().get(pos).getFuro();
+           String medida = product.getVar().get(pos).getMedida();
+           PUtipo.setText("Medida e Furos: " + medida + "MM, " + furos + " furos");
+           order.setVariante(furos + "/" + medida);
         }
 
 
