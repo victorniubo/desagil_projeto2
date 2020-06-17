@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TabelaB"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:text="Tabela B" />
 
         <RadioButton
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tabela C"
-            android:layout_marginLeft="70sp"/>
+            android:layout_marginLeft="50sp"/>
 
     </RadioGroup>
 
@@ -168,11 +168,16 @@
 
     </LinearLayout>
 
+
     <Button
         android:id="@+id/addcart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:background="#77E17B"
+        android:layout_marginTop="20sp"
         android:text="Adicionar ao Carrinho" />
 
 </LinearLayout>
+
