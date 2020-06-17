@@ -3,19 +3,15 @@ package br.edu.insper.al.victoran.projeto2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
-import static java.lang.Double.parseDouble;
-
 public class Order implements Parcelable {
     private Product produto;
     private int quantidade;
     private String variante;
 
-    public Order(Product produto){
-    this.produto = produto;
-    this.quantidade = 0;
-    this.variante = "-";
+    public Order(Product produto) {
+        this.produto = produto;
+        this.quantidade = 0;
+        this.variante = "-";
     }
 
     public void setQuantidade(int quantidade) {
@@ -27,13 +23,13 @@ public class Order implements Parcelable {
     }
 
 
-    public double CalculateQuant(){
-        double preco  = produto.getprecoCerto();
-        double precoTotal = quantidade * preco;
-        return precoTotal;
+    public double CalculateQuant() {
+        double preco = produto.getprecoCerto();
+        return quantidade * preco;
 
     }
-    public Product getProduto(){
+
+    public Product getProduto() {
         return produto;
     }
 

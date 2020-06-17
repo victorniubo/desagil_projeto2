@@ -32,9 +32,9 @@ public class Product implements Parcelable {
         this.preco2 = preco2;
         this.preco3 = preco3;
         this.variacao = variacao;
-        if (Double.valueOf(preco1).equals(Double.valueOf(preco2)) && Double.valueOf(preco2).equals(Double.valueOf(preco3))){
+        if (Double.valueOf(preco1).equals(Double.valueOf(preco2)) && Double.valueOf(preco2).equals(Double.valueOf(preco3))) {
             this.precoCerto = Double.valueOf(preco1);
-        }else{
+        } else {
             this.precoCerto = 0.00;
         }
         this.foto = foto;
@@ -68,21 +68,57 @@ public class Product implements Parcelable {
         }
     };
 
-    public String getFoto(){return foto;}
-    public String getCategoria(){return categoria;}
-    public String getLinha(){return linha;}
-    public String getModelo(){return modelo;}
-    public String getTipo(){return tipo; }
-    public String getCOD() { return COD;}
-    public String getDescritivo(){ return descritivo;}
-    public String getPreco1(){return preco1;}
-    public String getPreco2(){return preco2;}
-    public String getPreco3(){return preco3;}
-    public Double getprecoCerto(){return precoCerto;}
-    public void setPrecoCerto(double preco){
+    public String getFoto() {
+        return foto;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getLinha() {
+        return linha;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getCOD() {
+        return COD;
+    }
+
+    public String getDescritivo() {
+        return descritivo;
+    }
+
+    public String getPreco1() {
+        return preco1;
+    }
+
+    public String getPreco2() {
+        return preco2;
+    }
+
+    public String getPreco3() {
+        return preco3;
+    }
+
+    public Double getprecoCerto() {
+        return precoCerto;
+    }
+
+    public void setPrecoCerto(double preco) {
         this.precoCerto = preco;
     }
-    public String getVariacao(){return variacao;}
+
+    public String getVariacao() {
+        return variacao;
+    }
 
     public String getId() {
         return id;
@@ -110,10 +146,11 @@ public class Product implements Parcelable {
         dest.writeString(foto);
     }
 
-    public ArrayList<Variantes> getVar(){
+    public ArrayList<Variantes> getVar() {
         return null;
     }
-    public int getIndicador(){
+
+    public int getIndicador() {
         return 134533;
     }
 }

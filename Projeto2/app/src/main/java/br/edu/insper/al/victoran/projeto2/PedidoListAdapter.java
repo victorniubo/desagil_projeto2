@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
 import java.text.DecimalFormat;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,20 +17,21 @@ import java.util.ArrayList;
 
 public class PedidoListAdapter extends ArrayAdapter {
 
-    ArrayList<Order> orders;
+    private ArrayList<Order> orders;
 
-    public PedidoListAdapter(Context context, int layout, ArrayList<Order> orders){
+    public PedidoListAdapter(Context context, int layout, ArrayList<Order> orders) {
         super(context, layout);
-        this.orders=orders;
+        this.orders = orders;
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
         TextView prodDesc;
         TextView prodPrec;
         TextView variacao;
         NumberPicker altQuant;
     }
+
     @Override
     public int getCount() {
         return orders.size();
@@ -42,8 +45,8 @@ public class PedidoListAdapter extends ArrayAdapter {
         row = convertView;
         ViewHolder viewHolder;
 
-        if(row==null){
-            row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_order_layout,parent,false);
+        if (row == null) {
+            row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_order_layout, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.prodDesc = row.findViewById(R.id.prodDesc);
             viewHolder.prodPrec = row.findViewById(R.id.prodPrec);
@@ -56,26 +59,25 @@ public class PedidoListAdapter extends ArrayAdapter {
 
 
             row.setTag(viewHolder);
-        }
-        else{
-            viewHolder=(ViewHolder) row.getTag();
+        } else {
+            viewHolder = (ViewHolder) row.getTag();
         }
         Double preco_int = orders.get(position).CalculateQuant();
         String preço_redondo = new DecimalFormat("#,##0.00").format(preco_int);
 //        String quantidade = String.valueOf(orders.get(position).getQuantidade());
-        if (orders.get(position).getProduto().getVar() == null){
+        if (orders.get(position).getProduto().getVar() == null) {
             viewHolder.variacao.setText("-");
-        }else {
+        } else {
             int pos = orders.get(position).getProduto().getIndicador();
             viewHolder.variacao.setText(orders.get(position).getProduto().getVar().get(pos).getFuro() +
-                    "\n"+ orders.get(position).getProduto().getVar().get(pos).getMedida());
+                    "\n" + orders.get(position).getProduto().getVar().get(pos).getMedida());
         }
 
         viewHolder.prodDesc.setText(orders.get(position).getProduto().getDescritivo());
         viewHolder.prodPrec.setText(preço_redondo);
         viewHolder.altQuant.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 orders.get(position).setQuantidade(newVal);
                 String newPrecoRed = new DecimalFormat("#,##0.00").format(orders.get(position).CalculateQuant());
                 viewHolder.prodPrec.setText(newPrecoRed);

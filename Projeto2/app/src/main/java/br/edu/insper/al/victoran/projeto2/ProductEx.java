@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class ProductEx extends Product implements Parcelable {
     private ArrayList<Variantes> var;
     private int indicador;
-    public ProductEx(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String variacao, String foto,ArrayList<Variantes> var) {
+
+    public ProductEx(String id, String categoria, String linha, String modelo, String tipo, String COD, String descritivo, String preco1, String preco2, String preco3, String variacao, String foto, ArrayList<Variantes> var) {
         super(id, categoria, linha, modelo, tipo, COD, descritivo, preco1, preco2, preco3, variacao, foto);
         this.var = var;
     }
@@ -16,7 +17,8 @@ public class ProductEx extends Product implements Parcelable {
     public void setIndicador(int indicador) {
         this.indicador = indicador;
     }
-    public int getIndicador(){
+
+    public int getIndicador() {
         return indicador;
     }
 
@@ -51,7 +53,7 @@ public class ProductEx extends Product implements Parcelable {
     };
 
     @Override
-    public ArrayList<Variantes> getVar(){
+    public ArrayList<Variantes> getVar() {
         return var;
     }
 
