@@ -5,9 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.NumberPicker;
 import android.widget.TextView;
-import java.text.DecimalFormat;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,21 +14,22 @@ import java.util.ArrayList;
 
 public class VarListAdapter extends ArrayAdapter {
 
-    ArrayList<Variantes> vars;
+    private ArrayList<Variantes> vars;
 
-    public VarListAdapter(Context context, int layout, ArrayList<Variantes> vars){
+    public VarListAdapter(Context context, int layout, ArrayList<Variantes> vars) {
         super(context, layout);
         this.vars = vars;
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
         TextView furos;
         TextView tamanho;
         TextView modelo;
         TextView cor;
 
     }
+
     @Override
     public int getCount() {
         return vars.size();
@@ -43,17 +43,16 @@ public class VarListAdapter extends ArrayAdapter {
         row = convertView;
         ViewHolder viewHolder;
 
-        if(row==null){
-            row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_var_layout,parent,false);
+        if (row == null) {
+            row = LayoutInflater.from(getContext()).inflate(R.layout.adapter_var_layout, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.furos=row.findViewById(R.id.furos);
-            viewHolder.tamanho=row.findViewById(R.id.tamanho);
-            viewHolder.modelo=row.findViewById(R.id.modelo);
+            viewHolder.furos = row.findViewById(R.id.furos);
+            viewHolder.tamanho = row.findViewById(R.id.tamanho);
+            viewHolder.modelo = row.findViewById(R.id.modelo);
             viewHolder.cor = row.findViewById(R.id.cor);
             row.setTag(viewHolder);
-        }
-        else{
-            viewHolder=(ViewHolder) row.getTag();
+        } else {
+            viewHolder = (ViewHolder) row.getTag();
         }
 
 

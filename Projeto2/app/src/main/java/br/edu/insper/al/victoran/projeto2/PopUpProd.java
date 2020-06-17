@@ -1,11 +1,9 @@
 package br.edu.insper.al.victoran.projeto2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,36 +11,37 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.content.Intent;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-public class PopUpProd extends AppCompatActivity{
-    
-    TextView PUcat;
-    TextView PUlinha;
-    TextView PUmod;
-    TextView PUcod;
-    TextView PUtipo;
-    TextView PUdesc;
-    TextView TituloSeletor;
-    TextView PrecoA;
-    TextView PrecoB;
-    TextView PrecoC;
-    TextView PrecoUnitario;
-    TextView PrecoTotal;
-    RadioGroup Seletor;
-    RadioButton TabelaA;
-    RadioButton TabelaB;
-    RadioButton TabelaC;
-    String mDrawableName;
-    ImageView imagem;
-    Order order;
-    ArrayList<Order> orders = new ArrayList<>();
-    Product product;
+public class PopUpProd extends AppCompatActivity {
+
+    private TextView PUcat;
+    private TextView PUlinha;
+    private TextView PUmod;
+    private TextView PUcod;
+    private TextView PUtipo;
+    private TextView PUdesc;
+    private TextView TituloSeletor;
+    private TextView PrecoA;
+    private TextView PrecoB;
+    private TextView PrecoC;
+    private TextView PrecoUnitario;
+    private TextView PrecoTotal;
+    private RadioGroup Seletor;
+    private RadioButton TabelaA;
+    private RadioButton TabelaB;
+    private RadioButton TabelaC;
+    private String mDrawableName;
+    private ImageView imagem;
+    private Order order;
+    private ArrayList<Order> orders = new ArrayList<>();
+    private Product product;
 
 
     @Override
@@ -86,43 +85,45 @@ public class PopUpProd extends AppCompatActivity{
         orders = intent.getParcelableArrayListExtra("lista");
         order = new Order(product);
 
-        PUcat.setText("Categoria: "+product.getCategoria());
-        PUlinha.setText("Linha: "+product.getLinha());
-        PUtipo.setText("Tipo: "+product.getTipo());
-        PUdesc.setText("Descrição: "+product.getDescritivo());
+        PUcat.setText("Categoria: " + product.getCategoria());
+        PUlinha.setText("Linha: " + product.getLinha());
+        PUtipo.setText("Tipo: " + product.getTipo());
+        PUdesc.setText("Descrição: " + product.getDescritivo());
 
 
-        if (product.getCOD().equals("-")){
+        if (product.getCOD().equals("-")) {
             PUcod.setTextSize(0);
-        }else{
-            PUcod.setText("Código: "+product.getCOD());
+        } else {
+            PUcod.setText("Código: " + product.getCOD());
         }
-        if (product.getModelo().equals("-")){
+        if (product.getModelo().equals("-")) {
             PUmod.setTextSize(0);
-        }else{
-            PUmod.setText("Modelo: "+product.getModelo());
-        }if(product.getVariacao().equals("-")){
+        } else {
+            PUmod.setText("Modelo: " + product.getModelo());
+        }
+        if (product.getVariacao().equals("-")) {
             PUtipo.setTextSize(0);
-        }else{
-           int pos = product.getIndicador();
-           String furos = product.getVar().get(pos).getFuro();
-           String medida = product.getVar().get(pos).getMedida();
-           PUtipo.setText("Medida e Furos: " + medida + "MM, " + furos + " furos");
-           order.setVariante(furos + "/" + medida);
+        } else {
+            int pos = product.getIndicador();
+            String furos = product.getVar().get(pos).getFuro();
+            String medida = product.getVar().get(pos).getMedida();
+            PUtipo.setText("Medida e Furos: " + medida + "MM, " + furos + " furos");
+            order.setVariante(furos + "/" + medida);
         }
 
 
         mDrawableName = product.getFoto();
-        if (mDrawableName.equals("-")){
+        if (mDrawableName.equals("-")) {
             imagem.setImageResource(R.drawable.jassyfoto);
 
-        }else{
-        Resources res = getResources();
-        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
-        imagem.setImageResource(resID);}
+        } else {
+            Resources res = getResources();
+            int resID = res.getIdentifier(mDrawableName, "drawable", getPackageName());
+            imagem.setImageResource(resID);
+        }
 
 
-        if(product.getprecoCerto() == 0.00){
+        if (product.getprecoCerto() == 0.00) {
             Seletor.setVisibility(View.VISIBLE);
             TituloSeletor.setTextSize(20);
             Seletor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -130,11 +131,11 @@ public class PopUpProd extends AppCompatActivity{
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     // find which radio button is selected
-                    if(checkedId == R.id.TabelaA) {
+                    if (checkedId == R.id.TabelaA) {
                         product.setPrecoCerto(Double.valueOf(product.getPreco1()));
                         PrecoUnitario.setText("R$: " + product.getprecoCerto());
                         PrecoTotal.setText(String.valueOf(order.CalculateQuant()));
-                    } else if(checkedId == R.id.TabelaB) {
+                    } else if (checkedId == R.id.TabelaB) {
                         product.setPrecoCerto(Double.valueOf(product.getPreco2()));
                         PrecoUnitario.setText("R$: " + product.getprecoCerto());
                         PrecoTotal.setText(String.valueOf(order.CalculateQuant()));
@@ -145,15 +146,14 @@ public class PopUpProd extends AppCompatActivity{
                     }
                 }
             });
-
-        }else{
+        } else {
             PrecoUnitario.setText("R$: " + product.getprecoCerto());
         }
 
 
         np2.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 order.setQuantidade(newVal);
                 String preço_redondo = new DecimalFormat("#,##0.00").format(order.CalculateQuant());
 
@@ -172,11 +172,11 @@ public class PopUpProd extends AppCompatActivity{
 
     public void onBackPressed() {
 
-        if (product.getVar() == null){
-        Intent intent = new Intent(PopUpProd.this, MainActivity.class);
-        intent.putParcelableArrayListExtra("lista",orders);
-        startActivity(intent);}
-        else{
+        if (product.getVar() == null) {
+            Intent intent = new Intent(PopUpProd.this, MainActivity.class);
+            intent.putParcelableArrayListExtra("lista", orders);
+            startActivity(intent);
+        } else {
             Intent intent4 = new Intent(PopUpProd.this, VarOverview.class);
             intent4.putExtra("Produto", product);
             intent4.putParcelableArrayListExtra("lista", orders);

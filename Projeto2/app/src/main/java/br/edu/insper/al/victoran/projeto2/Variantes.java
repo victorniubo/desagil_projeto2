@@ -10,7 +10,7 @@ public class Variantes implements Parcelable {
     private String medida;
     private String cor;
 
-    public Variantes(String model, String descritivo, String furo, String medida, String  cor){
+    public Variantes(String model, String descritivo, String furo, String medida, String cor) {
         this.model = model;
         this.descritivo = descritivo;
         this.furo = furo;
